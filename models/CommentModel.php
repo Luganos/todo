@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use yii\helpers\HtmlPurifier;
 
 class CommentModel extends Model
 {
@@ -64,7 +65,7 @@ class CommentModel extends Model
 		$author_id = $this->getAuthorId($data['CommentForm']['name']);
 		
 	        Yii::$app->db->createCommand()->insert('comment', [
-                                'text' => $data['CommentForm']['comment'],
+                                'text' => HtmlPurifier::process($data['CommentForm']['comment']),
 		                'author_id' => $author_id,
 		                'created' => $time,
                 ])->execute(); 
@@ -86,7 +87,7 @@ class CommentModel extends Model
    private function getAuthorId($author) {
 	  
 	  $row = Yii::$app->db->createCommand("SELECT author_id FROM author WHERE name=:name LIMIT 1")
-		->bindValue(':name', $author)  
+		->bindValue(':name', HtmlPurifier::process($author))  
                 ->queryOne();
           
           if(!$row)
@@ -132,7 +133,7 @@ class CommentModel extends Model
    private function createNewAuthor($author)
    {	   
 	  Yii::$app->db->createCommand()->insert('author', [
-              'name' => $author,
+              'name' => HtmlPurifier::process($author),
           ])->execute(); 
       
           $id = Yii::$app->db->getLastInsertID();

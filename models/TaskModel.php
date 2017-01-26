@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use yii\helpers\HtmlPurifier;
 
 class TaskModel extends Model
 {
@@ -28,8 +29,8 @@ class TaskModel extends Model
 	       $time = date("Y-m-d H:i:s");
 
 	        Yii::$app->db->createCommand()->insert('task', [
-                                'text' => $data['TaskForm']['text'],
-		                'deadline' => $data['TaskForm']['deadline'],
+                                'text' => HtmlPurifier::process($data['TaskForm']['text']),
+		                'deadline' => HtmlPurifier::process($data['TaskForm']['deadline']),
 		                'status' => 0,
 		                'created' => $time,
                 ])->execute(); 	    

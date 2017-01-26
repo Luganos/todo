@@ -18,7 +18,7 @@ class m170126_120201_create_author_table extends Migration
     {
         $this->createTable('author', [
             'author_id' => Schema::TYPE_PK,
-            'text' => Schema::TYPE_TEXT,
+            'name' => Schema::TYPE_TEXT,
         ], $this->engine);
     }
 
