@@ -185,6 +185,7 @@
                     html +='               <th>Text</th>';
                     html +='               <th>Deadline</th>';
 		    html +='               <th>Created</th>';
+		    html +='               <th>Views</th>';
                     html +='            </tr>';
                     html +='          </thead>';
                     html +='          <tbody>';
@@ -199,6 +200,7 @@
                            html += '        <td class ="task-row-'+ data[content].task_id +'" id ="task-row-text-'+ data[content].task_id +'">' + data[content].text + '</td>';
                            html += '        <td class ="task-row-'+ data[content].task_id +'" id ="task-row-deadline-'+ data[content].task_id +'">' + data[content].deadline + '</td>';
                            html += '        <td class ="task-row-'+ data[content].task_id +'" id ="task-row-created-'+ data[content].task_id +'">' + data[content].created + '</td>';
+			   html += '        <td class ="task-row-'+ data[content].task_id +'" id ="task-row-views-'+ data[content].task_id +'">' + data[content].views + '</td>';
                            html += '     </tr>';
 			   html += '     <br>';
                        
@@ -220,6 +222,7 @@
 			   $("#task-row-text-"+ data[block].task_id).css("text-decoration", "line-through"); 
 			   $("#task-row-deadline-"+ data[block].task_id).css("text-decoration", "line-through");
 			   $("#task-row-created-"+ data[block].task_id).css("text-decoration", "line-through"); 
+			   $("#task-row-views-"+ data[block].task_id).css("text-decoration", "line-through");
 			} else {
 			    
 			     $("#disabled-checkbox-"+ data[block].task_id).click(function() {
