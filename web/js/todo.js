@@ -190,15 +190,15 @@
                     html +='          <tbody>';
                     for (var content in data) {
  
-                           html += '     <tr id ="task-row-'+ data[content].task_id +'">'; 
+                           html += '     <tr>'; 
 			   if (data[content].status == 0) {
 			      html +='     <td id ="checkbox-task"><input type="checkbox" id="disabled-checkbox-'+ data[content].task_id +'" value="0"></td>';
 		           } else {
 			      html +='     <td id ="checkbox-task"><input type="checkbox" id="disabled-checkbox-'+ data[content].task_id +'" checked></td>';
 		           }
-                           html += '        <td id ="task-row-text-'+ data[content].task_id +'">' + data[content].text + '</td>';
-                           html += '        <td id ="task-row-deadline-'+ data[content].task_id +'">' + data[content].deadline + '</td>';
-                           html += '        <td id ="task-row-created-'+ data[content].task_id +'">' + data[content].created + '</td>';
+                           html += '        <td class ="task-row-'+ data[content].task_id +'" id ="task-row-text-'+ data[content].task_id +'">' + data[content].text + '</td>';
+                           html += '        <td class ="task-row-'+ data[content].task_id +'" id ="task-row-deadline-'+ data[content].task_id +'">' + data[content].deadline + '</td>';
+                           html += '        <td class ="task-row-'+ data[content].task_id +'" id ="task-row-created-'+ data[content].task_id +'">' + data[content].created + '</td>';
                            html += '     </tr>';
 			   html += '     <br>';
                        
@@ -210,11 +210,7 @@
 		    
 		    for (var block in data) {
 			
-			$("#task-row-"+ data[block].task_id).click(function() {
-			    
-			    window.location.href = "/index.php/site/comment?id=" + this.id.substring(9);
 
-			});
 			
 			if (data[block].status == 1) {
 			   $("#disabled-checkbox-"+ data[block].task_id).on("click", function(event) {
@@ -231,6 +227,14 @@
 				 setTask(this.id.substring(18));
 			     });
 			}
+			  
+		        $(".task-row-"+ data[block].task_id).click(function() {
+			    
+			    var name = $(this).attr('class');
+			    
+			    window.location.href = "/index.php/site/comment?id=" + name.substring(9);
+
+			});
 			
 		    }
 	    }
