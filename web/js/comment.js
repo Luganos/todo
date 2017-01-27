@@ -131,7 +131,6 @@
 		     success: function(data) {
 			   if (data !== 0) {
 			       showTask(data); 
-			       eventTask();
 			   } else {
 			       showError(); 
 			   }
@@ -142,7 +141,7 @@
 	    
 	    function eventTask () {
 		
-                $("#checkbox-task").click(function() {
+                $("#disabled-checkbox").click(function() {
 		    
 		    var object = prepareRequestCheck();
 		    
@@ -153,6 +152,7 @@
 		         dataType:"JSON",
 		         success: function(data) {
 			     if (data['status'] == 1) {
+			       $("#disabled-checkbox").unbind('click');
 			       $('#disabled-checkbox').on("click", function(event) {
                                  event.preventDefault();
                                  return false;
@@ -195,14 +195,19 @@
 		    
 		    $('#task-description').html(html);
 		    
-		    if (data.status == 1) {  
+		    if (data.status == 1) { 
+			
+		       $("#disabled-checkbox").unbind('click');
+		       
 		       $('#disabled-checkbox').on("click", function(event) {
                           event.preventDefault();
                           return false;
                        });
 		       
 		       $('.row-for-one-task').css("text-decoration", "line-through"); 
-	            }
+	            } else {
+			 eventTask();
+		    }
 		     
 	    }
 	    
