@@ -185,7 +185,7 @@
                     html +='               <th>Text</th>';
                     html +='               <th>Deadline</th>';
 		    html +='               <th>Created</th>';
-		    html +='               <th>Views</th>';
+		    html +='               <th>Comments</th>';
                     html +='            </tr>';
                     html +='          </thead>';
                     html +='          <tbody>';

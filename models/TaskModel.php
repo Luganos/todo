@@ -15,7 +15,7 @@ class TaskModel extends Model
    */
    public function getAllTasks() 
    {
-	  $records = Yii::$app->db->createCommand("SELECT TASK.text, TASK.deadline, TASK.task_id, TASK.status, TASK.created, TASK.done, VIEWS.views FROM (SELECT text, deadline, task_id, status, done, created FROM task ORDER BY task_id DESC) AS TASK LEFT JOIN (SELECT task_id, COUNT(*) AS views FROM task_to_comment GROUP BY task_id) AS VIEWS ON (TASK.task_id = VIEWS.task_id)")
+	  $records = Yii::$app->db->createCommand("SELECT TASK.text, TASK.deadline, TASK.task_id, TASK.status, TASK.created, TASK.done, IFNULL(VIEWS.views, 0) as views FROM (SELECT text, deadline, task_id, status, done, created FROM task ORDER BY task_id DESC) AS TASK LEFT JOIN (SELECT task_id, COUNT(*) AS views FROM task_to_comment GROUP BY task_id) AS VIEWS ON (TASK.task_id = VIEWS.task_id)")
               ->queryAll();
 	  
 	  return $records;
